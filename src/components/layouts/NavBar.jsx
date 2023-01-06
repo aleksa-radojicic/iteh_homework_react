@@ -38,9 +38,9 @@ function NavBar() {
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="contact.php">
+              <Link className="nav-link" to="/contact">
                 Contact Us
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item">

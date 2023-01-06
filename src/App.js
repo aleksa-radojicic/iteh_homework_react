@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./components/index-page/Index";
 import NavBar from "./components/layouts/NavBar";
 import Footer from "./components/layouts/Footer";
+import Contact from "./components/contact-page/Contact";
 
 function App() {
   const products = [
@@ -75,6 +76,10 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Index />} />
+      </Routes>
+
+      <Routes>
+        <Route path="/contact" element={<Contact />} />
       </Routes>
 
       <Footer />
