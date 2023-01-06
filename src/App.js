@@ -6,6 +6,7 @@ import NavBar from "./components/layouts/NavBar";
 import Footer from "./components/layouts/Footer";
 import Contact from "./components/contact-page/Contact";
 import Shop from "./components/shop-page/Shop";
+import SingleProduct from "./components/single-product-page/SingleProduct";
 
 function App() {
   const products = [
@@ -81,6 +82,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
 
         <Route path="/shop" element={<Shop products={products} />} />
+
+        <Route path="/single_product/:id" element={<SingleProduct products={products} />} />
       </Routes>
 
       <Footer />
