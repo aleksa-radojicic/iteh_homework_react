@@ -5,6 +5,7 @@ import Index from "./components/index-page/Index";
 import NavBar from "./components/layouts/NavBar";
 import Footer from "./components/layouts/Footer";
 import Contact from "./components/contact-page/Contact";
+import Shop from "./components/shop-page/Shop";
 
 function App() {
   const products = [
@@ -76,10 +77,10 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Index />} />
-      </Routes>
 
-      <Routes>
         <Route path="/contact" element={<Contact />} />
+
+        <Route path="/shop" element={<Shop products={products} />} />
       </Routes>
 
       <Footer />
