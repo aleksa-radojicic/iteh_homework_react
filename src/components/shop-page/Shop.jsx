@@ -1,9 +1,16 @@
 import React from "react";
+import Pagination from "./Pagination";
 import Product from "./Product";
 import "../../shop.css";
 import { Helmet } from "react-helmet";
 
-const Shop = ({ products }) => {
+const Shop = ({
+  products,
+  current_page,
+  total_count,
+  page_size,
+  on_page_change,
+}) => {
   return (
     <>
       <Helmet>
@@ -21,6 +28,13 @@ const Shop = ({ products }) => {
           {products.map((product) => (
             <Product product={product} key={product.id} />
           ))}
+
+          <Pagination
+            current_page={current_page}
+            total_count={total_count}
+            page_size={page_size}
+            on_page_change={on_page_change}
+          />
         </div>
       </section>
     </>

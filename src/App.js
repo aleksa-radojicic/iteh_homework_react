@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./components/index-page/Index";
@@ -7,6 +7,9 @@ import Footer from "./components/layouts/Footer";
 import Contact from "./components/contact-page/Contact";
 import Shop from "./components/shop-page/Shop";
 import SingleProduct from "./components/single-product-page/SingleProduct";
+
+//number of products shown on a single page
+const page_size = 1;
 
 function App() {
   const products = [
@@ -70,7 +73,78 @@ function App() {
       created_at: "2022-12-30T10:27:02.000000Z",
       updated_at: "2022-12-30T10:27:02.000000Z",
     },
+    {
+      id: 6,
+      name: "EHEIM External Filter",
+      description: "filter for freshwater and marine aquariums",
+      image: "featured1.jpg",
+      image2: "featured1.jpg",
+      image3: "featured1.jpg",
+      image4: "featured1.jpg",
+      price: 149.990000000000009094947017729282379150390625,
+      created_at: "2022-12-30T10:27:02.000000Z",
+      updated_at: "2022-12-30T10:27:02.000000Z",
+    },
+    {
+      id: 7,
+      name: "EHEIM External Filter",
+      description: "filter for freshwater and marine aquariums",
+      image: "featured1.jpg",
+      image2: "featured1.jpg",
+      image3: "featured1.jpg",
+      image4: "featured1.jpg",
+      price: 149.990000000000009094947017729282379150390625,
+      created_at: "2022-12-30T10:27:02.000000Z",
+      updated_at: "2022-12-30T10:27:02.000000Z",
+    },
+    {
+      id: 8,
+      name: "EHEIM External Filter",
+      description: "filter for freshwater and marine aquariums",
+      image: "featured1.jpg",
+      image2: "featured1.jpg",
+      image3: "featured1.jpg",
+      image4: "featured1.jpg",
+      price: 149.990000000000009094947017729282379150390625,
+      created_at: "2022-12-30T10:27:02.000000Z",
+      updated_at: "2022-12-30T10:27:02.000000Z",
+    },
+    {
+      id: 9,
+      name: "EHEIM External Filter",
+      description: "filter for freshwater and marine aquariums",
+      image: "featured1.jpg",
+      image2: "featured1.jpg",
+      image3: "featured1.jpg",
+      image4: "featured1.jpg",
+      price: 149.990000000000009094947017729282379150390625,
+      created_at: "2022-12-30T10:27:02.000000Z",
+      updated_at: "2022-12-30T10:27:02.000000Z",
+    },
+    {
+      id: 10,
+      name: "EHEIM External Filter",
+      description: "filter for freshwater and marine aquariums",
+      image: "featured1.jpg",
+      image2: "featured1.jpg",
+      image3: "featured1.jpg",
+      image4: "featured1.jpg",
+      price: 149.990000000000009094947017729282379150390625,
+      created_at: "2022-12-30T10:27:02.000000Z",
+      updated_at: "2022-12-30T10:27:02.000000Z",
+    },
   ];
+
+  const [current_page, setCurrentPage] = useState(1);
+
+  //using useMemo hook to improve performance (executing the
+  //function only when variable current page changes)
+  const products_on_current_page = useMemo(() => {
+    const first_page_index = (current_page - 1) * page_size;
+    const last_page_index = first_page_index + page_size;
+
+    return products.slice(first_page_index, last_page_index);
+  }, [current_page]);
 
   return (
     <BrowserRouter>
@@ -81,9 +155,22 @@ function App() {
 
         <Route path="/contact" element={<Contact />} />
 
-        <Route path="/shop" element={<Shop products={products} />} />
-
-        <Route path="/single_product/:id" element={<SingleProduct products={products} />} />
+        <Route
+          path="/shop"
+          element={
+            <Shop
+              products={products_on_current_page}
+              current_page={current_page}
+              total_count={products.length}
+              page_size={page_size}
+              on_page_change={(page) => setCurrentPage(page)}
+            />
+          }
+        />
+        <Route
+          path="/single_product/:id"
+          element={<SingleProduct products={products} />}
+        />
       </Routes>
 
       <Footer />
